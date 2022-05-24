@@ -7,10 +7,9 @@ TODO
 #include <stdio.h>
 #include <stdlib.h>
 #include <inttypes.h>
+#include "vehicule.h"
 
-typedef uint16_t ui16;
-typedef enum { STANDARD, HAUT_DE_GAMME } TypeVoiture;
-typedef enum { VOITURE, CAMIONETTE } TypeVehicule;
+
 
 // Constantes
 const ui16 TAXE_BASE_VOITURE_CHF = 400;
@@ -22,96 +21,17 @@ const ui16 TAXE_CYLINDREE_1 = 0; // en cm3
 const ui16 TAXE_CYLINDREE_2 = 50; // en cm3
 const double TAXE_CYLINDREE_3 = 0.05; // en cm3
 
-// Prédéclaration des structures
-struct HautDeGamme;
-struct Standard;
-struct Voiture;
-struct Camionette;
-struct Vehicule;
 
-typedef struct {
-	uint16_t puissanceDuMoteur
-} HautDeGamme;
-
-typedef struct {
-	uint16_t cm3Cylindree;
-	uint16_t quantiteRejetCO2;
-} Standard;
-
-typedef struct{
-
-	ui16 poids;
-    TypeVoiture typevoiture;
-	
-	union {
-		HautDeGamme hautDeGamme;
-		Standard standard;
-	};
-
-} Voiture;
-
-typedef struct{
-	
-	double volumeTransport;
-	
-} Camionette;
-
-typedef struct {
-
-	const char* marque;
-	TypeVehicule typeVehicule;
-	char* plaqueImmatriculation;
-	union {
-		Camionette camionette;
-		Voiture voiture;
-	} unionVehicule;
-	
-} Vehicule;
 
 int main(void) {
 	// Exemples d'utilisation
 
-	Vehicule voitureStandard = {
-		.marque = "Peugeot",
-		.typeVehicule = VOITURE,
-		.plaqueImmatriculation = "VD123456",
-		.unionVehicule = {
-			.voiture = {
-				.poids = 1500,
-				.typevoiture = STANDARD,
-				.standard = {
-					.cm3Cylindree = 1,
-					.quantiteRejetCO2 = 1
-				}
-			}
-		}
-	};
+   const Vehicule *parking[] = {
+      voitureStandard("VD123456", "Fiat", 300, 150, 5),
+      voitureHautDeGamme("VD123455", "Jaguar", 1000, 600),
+      camionette("VD123444", "Citroen", 500)
+   };
 
-	Vehicule voitureHautDeGamme = {
-		.marque = "Ferrari",
-		.typeVehicule = VOITURE,
-		.plaqueImmatriculation = "ZH987654",
-		.unionVehicule = {
-			.voiture = {
-				.poids = 1300,
-				.typevoiture = HAUT_DE_GAMME,
-				.hautDeGamme = {
-					.puissanceDuMoteur = 500
-				}
-			}
-		}
-	};
-
-	Vehicule camionette = {
-		.marque = "Mercedes",
-		.typeVehicule = CAMIONETTE,
-		.plaqueImmatriculation = "FR56789",
-		.unionVehicule = {
-			.camionette = {
-				.volumeTransport = 100
-			}
-		}
-	};
 }
 
 

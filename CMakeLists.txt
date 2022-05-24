@@ -3,5 +3,5 @@ project(parking)
 
 set(C_STANDARD 20)
 
-add_executable(main main.c)
+add_executable(main main.c vehicule.c vehicule.h taxes.c taxes.h parking.c parking.h)
 target_link_libraries(main PRIVATE m)
