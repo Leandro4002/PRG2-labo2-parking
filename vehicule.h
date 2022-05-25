@@ -27,15 +27,15 @@ typedef struct {
    uint16_t quantiteRejetCO2;
 } Standard;
 
-typedef struct{
+typedef union {
+   HautDeGamme hautDeGamme;
+   Standard    standard;
+} SpecificiteVoiture;
 
+typedef struct{
    ui16 poids;
    TypeVoiture typevoiture;
-
-   union {
-      HautDeGamme hautDeGamme;
-      Standard standard;
-   };
+   SpecificiteVoiture specificiteVoiture;
 
 } Voiture;
 
@@ -45,23 +45,27 @@ typedef struct{
 
 } Camionette;
 
+typedef union {
+   Camionette camionette;
+   Voiture voiture;
+} SpecificiteVehicule;
+
 typedef struct {
 
    const char* marque;
-   TypeVehicule typeVehicule;
    char* plaqueImmatriculation;
-   union {
-      Camionette camionette;
-      Voiture voiture;
-   } unionVehicule;
+   TypeVehicule typeVehicule;
+   SpecificiteVehicule specificiteVehicule;
 
 } Vehicule;
 
 // Initialisation des fonctions --------------------------------------------------------------------
-Vehicule *voitureStandard(char* plaqueImmatriculation, char* marque, ui16 poids, uint16_t cm3Cylindree, uint16_t quantiteRejetCO2);
+Vehicule voitureStandard(char* plaqueImmatriculation, char* marque, ui16 poids, uint16_t cm3Cylindree, uint16_t quantiteRejetCO2);
 
-Vehicule *voitureHautDeGamme(char* plaqueImmatriculation, char* marque, ui16 poids, uint16_t puissanceDuMoteur);
+Vehicule voitureHautDeGamme(char* plaqueImmatriculation, char* marque, ui16 poids, uint16_t puissanceDuMoteur);
 
-Vehicule *camionette(char* plaqueImmatriculation, char* marque, double volumeTransport);
+Vehicule camionette(char* plaqueImmatriculation, char* marque, double volumeTransport);
+
+void afficherVehicule(const Vehicule *vehicule);
 
 #endif //PARKING_VEHICULE_H

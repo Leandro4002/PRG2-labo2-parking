@@ -26,11 +26,13 @@ const double TAXE_CYLINDREE_3 = 0.05; // en cm3
 int main(void) {
 	// Exemples d'utilisation
 
-   const Vehicule *parking[] = {
+   const Vehicule parking[] = {
       voitureStandard("VD123456", "Fiat", 300, 150, 5),
       voitureHautDeGamme("VD123455", "Jaguar", 1000, 600),
       camionette("VD123444", "Citroen", 500)
    };
+
+   afficherVehicule(&parking[0]);
 
 }
 
