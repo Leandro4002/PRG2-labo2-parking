@@ -28,29 +28,33 @@ Vehicule camionette(char* plaqueImmatriculation, char* marque, double volumeTran
 void afficherVehicule(const Vehicule *vehicule){
    assert(vehicule);
 
-   printf("Marque : %s\n", vehicule->marque);
-   printf("Plaque : %s\n", vehicule->plaqueImmatriculation);
+   printf("Type                : %s\n", TYPES_VEHICULE[vehicule->typeVehicule]);
+   printf("Marque              : %s\n", vehicule->marque);
+   printf("Plaque              : %s\n", vehicule->plaqueImmatriculation);
 
    switch (vehicule->typeVehicule) {
       case VOITURE:
 
-         printf("Poids [kg] : %" PRIu16 "\n", vehicule->specificiteVehicule.voiture.poids);
+         printf("Categorie voiture   : %s\n", TYPES_VOITURE[vehicule->specificiteVehicule.voiture.typevoiture]);
+         printf("Poids [kg]          : %" PRIu16 "\n", vehicule->specificiteVehicule.voiture.poids);
 
          switch (vehicule->specificiteVehicule.voiture.typevoiture) {
             case STANDARD:
-               printf("Cylindree [cm3] : %" PRIu16 "\n", vehicule->specificiteVehicule.voiture.specificiteVoiture.standard.cm3Cylindree);
-               printf("Rejet CO2 [g/km] : %" PRIu16 "\n", vehicule->specificiteVehicule.voiture.specificiteVoiture.standard.quantiteRejetCO2);
+               printf("Cylindree [cm3]     : %" PRIu16 "\n", vehicule->specificiteVehicule.voiture.specificiteVoiture.standard.cm3Cylindree);
+               printf("Rejet CO2 [g/km]    : %" PRIu16 "\n", vehicule->specificiteVehicule.voiture.specificiteVoiture.standard.quantiteRejetCO2);
                break;
 
             case HAUT_DE_GAMME:
-               printf("Puissance [CV] : %" PRIu16 "\n", vehicule->specificiteVehicule.voiture.specificiteVoiture.hautDeGamme.puissanceDuMoteur);
+               printf("Puissance [CV]      : %" PRIu16 "\n", vehicule->specificiteVehicule.voiture.specificiteVoiture.hautDeGamme.puissanceDuMoteur);
                break;
+            default: break;
          }
-
          break;
 
       case CAMIONETTE:
-         printf("Volume de transport : %f\n", vehicule->specificiteVehicule.camionette.volumeTransport);
+         printf("Volume de transport : %.2f\n", vehicule->specificiteVehicule.camionette.volumeTransport);
          break;
+
+      default: break;
    }
 }

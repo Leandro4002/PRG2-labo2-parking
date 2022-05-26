@@ -5,23 +5,8 @@ TODO
 */
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <inttypes.h>
 #include "vehicule.h"
-
-
-
-// Constantes
-const ui16 TAXE_BASE_VOITURE_CHF = 400;
-const ui16 TAXE_BASE_CAMIONETTE_CHF = 700;
-const ui16 TAXE_CAMIONETTE_PAR_VOLUME_CHF = 10; // volume m3
-const ui16 TAXE_PUISSANCE_MOTEUR_CHF = 200; // en chevaux
-const ui16 TAXE_POIDS_CHF = 20; // en tonnes
-const ui16 TAXE_CYLINDREE_1 = 0; // en cm3
-const ui16 TAXE_CYLINDREE_2 = 50; // en cm3
-const double TAXE_CYLINDREE_3 = 0.05; // en cm3
-
-
+#include "parking.h"
 
 int main(void) {
 	// Exemples d'utilisation
@@ -32,7 +17,9 @@ int main(void) {
       camionette("VD123444", "Citroen", 500)
    };
 
-   afficherVehicule(&parking[0]);
+   const size_t NB_VEHICULE = sizeof(parking) / sizeof(parking[0]);
+
+   afficherParking(parking, NB_VEHICULE);
 
 }
 
