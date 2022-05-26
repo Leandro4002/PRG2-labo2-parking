@@ -1,7 +1,3 @@
-//
-// Created by florian on 24.05.2022.
-//
-
 #include "parking.h"
 #include <stdio.h>
 #include <string.h>

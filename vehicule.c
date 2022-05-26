@@ -1,11 +1,6 @@
-//
-// Created by florian on 24.05.2022.
-//
-
 #include "vehicule.h"
 #include <assert.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 Vehicule voitureStandard(char* plaqueImmatriculation, char* marque, ui16 poids, uint16_t cm3Cylindree, uint16_t quantiteRejetCO2){
    assert(plaqueImmatriculation != NULL && marque != NULL);

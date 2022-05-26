@@ -1,9 +1,3 @@
-/*
-TODO
- - Réordonner les attributs des structs pour que ça prennent le moins de place possible
-
-*/
-
 #include <stdio.h>
 #include "vehicule.h"
 #include "parking.h"

@@ -1,6 +1,8 @@
-//
-// Created by florian on 24.05.2022.
-//
+/*
+TODO
+ - Réordonner les attributs des structs pour que ça prennent le moins de place possible
+
+*/
 
 #ifndef PARKING_VEHICULE_H
 #define PARKING_VEHICULE_H
