@@ -4,6 +4,17 @@
 #include <stdlib.h>
 #include "vehicule.h"
 
-void afficherParking(const Vehicule *parking, const size_t nbVehicule);
+typedef struct {
+	Vehicule vehicule;
+	ui16 taxeAnnuelle;
+} PlaceDeParking;
+
+void calculerTaxesAnnuellesParking(PlaceDeParking *parking, const size_t nbVehicule);
+
+void trierParking(PlaceDeParking *parking, const size_t nbVehicule);
+
+void afficherParking(const PlaceDeParking *parking, const size_t nbVehicule);
+
+void afficherPlaceDeParking(const PlaceDeParking* placeDeParking);
 
 #endif //PARKING_PARKING_H

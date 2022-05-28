@@ -61,3 +61,9 @@ ui16 calculerTaxeAnnuelle(const Vehicule* vehicule) {
 
 	return montant;
 }
+
+// Nettoyage des defines
+#undef VOIT_ALIAS
+#undef VOIT_STANDARD_ALIAS
+#undef VOIT_HAUT_DE_GAMME_ALIAS
+#undef CAMIONETTE_ALIAS
