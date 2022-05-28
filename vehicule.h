@@ -1,13 +1,24 @@
 /*
-TODO
- - Réordonner les attributs des structs pour que ça prennent le moins de place possible
+-----------------------------------------------------------------------------------
+Nom du fichier : vehicule.h
+Auteur(s)      : Florian conti, Léo Zmoos & Leandro Saraiva Maia
+Date creation  : 24.05.2022
 
+Description    : 
+
+Remarque(s)    : Les limites du programme sont :
+                  - 
+
+Compilateur    : Compilation fonctionnelle avec :
+                  - Mingw-w64 gcc 11.2.0
+                  - gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0
+-----------------------------------------------------------------------------------
 */
 
 #ifndef PARKING_VEHICULE_H
 #define PARKING_VEHICULE_H
 
-#include <inttypes.h>
+#include <inttypes.h> // Requis pour uint16_t
 
 typedef uint16_t ui16;
 
@@ -20,45 +31,44 @@ static const char* TYPES_VEHICULE[] = { "Voiture", "Camionette" };
 static const char* TYPES_VOITURE[] = { "Standard", "Haut de gamme" };
 
 // Déclaration des unions et structures-------------------------------------------------------------
-typedef struct {
+// A côté de chaque structure il y a un commentaire indiquant la taille
+// que va prendre la structure en mémoire.
+// Cela peut dépendre du compilateur mais les tailles indiqué sont les plus probables.
+
+typedef struct { // 2 bytes
    ui16 puissanceDuMoteur;
 } HautDeGamme;
 
-typedef struct {
+typedef struct { // 4 bytes
    ui16 cm3Cylindree;
    ui16 quantiteRejetCO2;
 } Standard;
 
-typedef union {
+typedef union { // 4 bytes
    HautDeGamme hautDeGamme;
    Standard    standard;
 } SpecificiteVoiture;
 
-typedef struct{
-   ui16 poids;
+typedef struct { // 12 bytes
    TypeVoiture typevoiture;
    SpecificiteVoiture specificiteVoiture;
-
+   ui16 poids;
 } Voiture;
 
-typedef struct{
-
+typedef struct { // 8 bytes
    double volumeTransport;
-
 } Camionette;
 
-typedef union {
-   Camionette camionette;
+typedef union { // 12 bytes
    Voiture voiture;
+   Camionette camionette;
 } SpecificiteVehicule;
 
-typedef struct {
-
-   const char* marque;
-   char* plaqueImmatriculation;
-   TypeVehicule typeVehicule;
+typedef struct { // 36 bytes
    SpecificiteVehicule specificiteVehicule;
-
+   const char* marque;
+   TypeVehicule typeVehicule;
+   char* plaqueImmatriculation;
 } Vehicule;
 
 // Déclaration des fonctions --------------------------------------------------------------------

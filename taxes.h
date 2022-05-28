@@ -1,3 +1,20 @@
+/*
+-----------------------------------------------------------------------------------
+Nom du fichier : taxes.h
+Auteur(s)      : Florian conti, Léo Zmoos & Leandro Saraiva Maia
+Date creation  : 24.05.2022
+
+Description    : 
+
+Remarque(s)    : Les limites du programme sont :
+                  - 
+
+Compilateur    : Compilation fonctionnelle avec :
+                  - Mingw-w64 gcc 11.2.0
+                  - gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0
+-----------------------------------------------------------------------------------
+*/
+
 #ifndef PARKING_TAXES_H
 #define PARKING_TAXES_H
 

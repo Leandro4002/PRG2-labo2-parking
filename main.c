@@ -1,17 +1,35 @@
-#include <stdio.h>
+/*
+-----------------------------------------------------------------------------------
+Nom du fichier : main.c
+Laboratoire    : Laboratoire nº 2 - Parking
+Auteur(s)      : Florian conti, Léo Zmoos & Leandro Saraiva Maia
+Date creation  : 24.05.2022
+
+Description    : Ce programme permet de modéliser un parking ainsi que les voitures
+                 qui se trouvent dessus. Ce programme calcule également le montant
+                 des taxes pour les véhicules se trouvant dans le parking. Le calcul
+                 des taxes est différent pour chaque catégorie de véhicule.
+
+Remarque(s)    : Les limites du programme sont :
+                  - 
+
+Compilateur    : Compilation fonctionnelle avec :
+                  - Mingw-w64 gcc 11.2.0
+                  - gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0
+-----------------------------------------------------------------------------------
+*/
+
 #include "vehicule.h"
 #include "parking.h"
 
 int main(void) {
-	// Exemples d'utilisation
-
    PlaceDeParking parking[] = {
-      { .vehicule = voitureStandard("VD123456", "Fiat", 1130u, 1200u, 125u) },
-      { .vehicule = voitureStandard("JU654321", "Toyota", 1320u, 1430u, 145u) },
-      { .vehicule = voitureStandard("BE011235", "Ford", 1660u, 2200u, 190u) },
-      { .vehicule = voitureHautDeGamme("LU080085", "Rolls-Royce", 2600u, 220u) },
-      { .vehicule = voitureHautDeGamme("ZH420666", "Jaguar", 1660u, 600u) },
-      { .vehicule = camionette("FR987654", "Citroen", 50u) }
+      { voitureStandard("VD123456", "Fiat", 1130u, 1200u, 125u) },
+      { voitureStandard("JU654321", "Toyota", 1320u, 1430u, 145u) },
+      { voitureStandard("BE011235", "Ford", 1660u, 2200u, 190u) },
+      { voitureHautDeGamme("LU080085", "Rolls-Royce", 2600u, 220u) },
+      { voitureHautDeGamme("ZH420666", "Jaguar", 1660u, 600u) },
+      { camionette("FR987654", "Citroen", 50u) }
    };
 
    const size_t NB_PLACE_DE_PARK = sizeof(parking) / sizeof(parking[0]);
@@ -29,5 +47,4 @@ int main(void) {
    afficherStat("Statistiques des taxes des voitures standards:", &statVoitureStandard);
    afficherStat("\nStatistiques des taxes des voitures haut de gamme:", &statVoitureHautDeGamme);
    afficherStat("\nStatistiques des taxes des camionettes:", &statCamionette);
-   
 }

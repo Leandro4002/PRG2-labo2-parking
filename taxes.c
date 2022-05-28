@@ -1,4 +1,21 @@
-#include <assert.h>
+/*
+-----------------------------------------------------------------------------------
+Nom du fichier : taxes.c
+Auteur(s)      : Florian conti, Léo Zmoos & Leandro Saraiva Maia
+Date creation  : 24.05.2022
+
+Description    : 
+
+Remarque(s)    : Les limites du programme sont :
+                  - 
+
+Compilateur    : Compilation fonctionnelle avec :
+                  - Mingw-w64 gcc 11.2.0
+                  - gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0
+-----------------------------------------------------------------------------------
+*/
+
+#include <assert.h> // Requis pour assert
 #include "taxes.h"
 
 // Constantes --------------------------------------------------------------------------------------
