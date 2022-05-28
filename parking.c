@@ -1,7 +1,8 @@
-#include "parking.h"
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
+#include "parking.h"
+#include "taxes.h"
 
 void afficherParking(const Vehicule *parking, const size_t nbVehicule) {
    assert(parking);
@@ -16,7 +17,10 @@ void afficherParking(const Vehicule *parking, const size_t nbVehicule) {
    for (size_t i = 0; i < nbVehicule; ++i) {
       assert(&parking[i]);
       afficherVehicule(&parking[i]);
-      //printf(calculerTaxe);
+      
+      ui16 taxeAnnuelle = calculerTaxeAnnuelle(&parking[i]);
+      printf("Taxe annuelle [CHF]      : %" PRIu16 "\n", taxeAnnuelle);
+
       printf("\n--------------------------------\n\n");
    }
 }
