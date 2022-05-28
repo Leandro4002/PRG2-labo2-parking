@@ -68,4 +68,10 @@ Vehicule voitureHautDeGamme(char* plaqueImmatriculation, char* marque, ui16 poid
 
 Vehicule camionette(char* plaqueImmatriculation, char* marque, double volumeTransport);
 
+int estVoitureStandard(const Vehicule* vehicule);
+
+int estVoitureHautDeGamme(const Vehicule* vehicule);
+
+int estCamionette(const Vehicule* vehicule);
+
 #endif //PARKING_VEHICULE_H

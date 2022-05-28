@@ -19,3 +19,21 @@ Vehicule camionette(char* plaqueImmatriculation, char* marque, double volumeTran
 
    return (Vehicule) {.marque = marque, .plaqueImmatriculation = plaqueImmatriculation, .typeVehicule = CAMIONETTE, {.camionette = {.volumeTransport = volumeTransport}}};
 }
+
+int estVoitureStandard(const Vehicule* vehicule) {
+   assert(vehicule);
+
+   return vehicule->typeVehicule == VOITURE && vehicule->specificiteVehicule.voiture.typevoiture == STANDARD;
+}
+
+int estVoitureHautDeGamme(const Vehicule* vehicule) {
+   assert(vehicule);
+
+   return vehicule->typeVehicule == VOITURE && vehicule->specificiteVehicule.voiture.typevoiture == HAUT_DE_GAMME;
+}
+
+int estCamionette(const Vehicule* vehicule) {
+   assert(vehicule);
+
+   return vehicule->typeVehicule == CAMIONETTE;
+}
