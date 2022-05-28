@@ -16,17 +16,17 @@ typedef enum { VOITURE, CAMIONETTE } TypeVehicule;
 typedef enum { STANDARD, HAUT_DE_GAMME } TypeVoiture;
 
 // Déclarations des tableaux de noms ---------------------------------------------------------------
-static const char* TYPES_VEHICULE[] = {"Voiture", "Camionette"};
-static const char* TYPES_VOITURE[] = {"Standard", "Haut de gamme"};
+static const char* TYPES_VEHICULE[] = { "Voiture", "Camionette" };
+static const char* TYPES_VOITURE[] = { "Standard", "Haut de gamme" };
 
 // Déclaration des unions et structures-------------------------------------------------------------
 typedef struct {
-   uint16_t puissanceDuMoteur;
+   ui16 puissanceDuMoteur;
 } HautDeGamme;
 
 typedef struct {
-   uint16_t cm3Cylindree;
-   uint16_t quantiteRejetCO2;
+   ui16 cm3Cylindree;
+   ui16 quantiteRejetCO2;
 } Standard;
 
 typedef union {
@@ -61,13 +61,13 @@ typedef struct {
 
 } Vehicule;
 
-// Initialisation des fonctions --------------------------------------------------------------------
-Vehicule voitureStandard(char* plaqueImmatriculation, char* marque, ui16 poids, uint16_t cm3Cylindree, uint16_t quantiteRejetCO2);
+// Déclaration des fonctions --------------------------------------------------------------------
+Vehicule voitureStandard(char* plaqueImmatriculation, char* marque, ui16 poids, ui16 cm3Cylindree, ui16 quantiteRejetCO2);
 
-Vehicule voitureHautDeGamme(char* plaqueImmatriculation, char* marque, ui16 poids, uint16_t puissanceDuMoteur);
+Vehicule voitureHautDeGamme(char* plaqueImmatriculation, char* marque, ui16 poids, ui16 puissanceDuMoteur);
 
 Vehicule camionette(char* plaqueImmatriculation, char* marque, double volumeTransport);
 
-void afficherVehicule(const Vehicule *vehicule);
+void afficherVehicule(const Vehicule* vehicule);
 
 #endif //PARKING_VEHICULE_H
