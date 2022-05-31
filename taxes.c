@@ -19,10 +19,10 @@ Compilateur    : Compilation fonctionnelle avec :
 #include "taxes.h"
 	
 // Utilisation de macro afin d'améliorer la lisibilité du code
-#define VOIT_ALIAS vehicule->specificiteVehicule.voiture
-#define VOIT_STANDARD_ALIAS VOIT_ALIAS.specificiteVoiture.standard
-#define VOIT_HAUT_DE_GAMME_ALIAS VOIT_ALIAS.specificiteVoiture.hautDeGamme
-#define CAMIONETTE_ALIAS vehicule->specificiteVehicule.camionette
+#define VOIT_ALIAS vehicule->voiture
+#define VOIT_STANDARD_ALIAS VOIT_ALIAS.standard
+#define VOIT_HAUT_DE_GAMME_ALIAS VOIT_ALIAS.hautDeGamme
+#define CAMIONETTE_ALIAS vehicule->camionette
 
 double calculerTaxeAnnuelle(const Vehicule* vehicule) {
 	assert(vehicule);

@@ -43,7 +43,6 @@ static const ui16   LIMITE_PUISSANCE_MOTEUR_TAXE = 250u; // puissance en chevaux
 static const ui16   LIMITE_CYLINDREE_TAXE = 1400u;       // cylindree en cm3
 static const ui16   LIMITE_CO2_TAXE = 130u;              // Rejet de CO2 en g/km
 
-
 // Déclarations de fonctions ------------------------------------------------------------------------
 double calculerTaxeAnnuelle(const Vehicule* vehicule);
 #endif //PARKING_TAXES_H

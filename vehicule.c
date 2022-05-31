@@ -20,59 +20,58 @@ Compilateur    : Compilation fonctionnelle avec :
 #include "vehicule.h"
 
 Vehicule creerVoitureStandard(char* plaqueImmatriculation, const char* marque, ui16 poids, ui16 cm3Cylindree, ui16 quantiteRejetCO2) {
-   assert(plaqueImmatriculation != NULL && marque != NULL);
+   assert(plaqueImmatriculation);
+   assert(marque);
+   assert(poids > 0);
+   assert(cm3Cylindree > 0);
+   // Pas d'assert pour quantiteRejetCO2 car il est possible d'avoir une voiture électrique par exemple
 
    return (Vehicule){
       .marque = marque,
       .plaqueImmatriculation = plaqueImmatriculation,
       .typeVehicule = VOITURE,
-      .specificiteVehicule = {
-         .voiture = {
-            .poids = poids,
-            .typeVoiture = STANDARD,
-            .specificiteVoiture = {
-               .standard = {
-                  .quantiteRejetCO2 = quantiteRejetCO2,
-                  .cm3Cylindree = cm3Cylindree
-               }
-            }
+      .voiture = {
+         .poids = poids,
+         .typeVoiture = STANDARD,
+         .standard = {
+            .quantiteRejetCO2 = quantiteRejetCO2,
+            .cm3Cylindree = cm3Cylindree
          }
       }
    };
 }
 
 Vehicule creerVoitureHautDeGamme(char* plaqueImmatriculation, const char* marque, ui16 poids, ui16 puissanceDuMoteur) {
-   assert(plaqueImmatriculation != NULL && marque != NULL);
+   assert(plaqueImmatriculation);
+   assert(marque);
+   assert(poids > 0);
+   assert(puissanceDuMoteur > 0);
 
    return (Vehicule){
       .marque = marque,
       .plaqueImmatriculation = plaqueImmatriculation,
       .typeVehicule = VOITURE,
-      .specificiteVehicule = {
-         .voiture = {
-            .poids = poids,
-            .typeVoiture = HAUT_DE_GAMME,
-            .specificiteVoiture = {
-               .hautDeGamme = {
-                  .puissanceDuMoteur = puissanceDuMoteur
-               }
-            }
+      .voiture = {
+         .poids = poids,
+         .typeVoiture = HAUT_DE_GAMME,
+         .hautDeGamme = {
+            .puissanceDuMoteur = puissanceDuMoteur
          }
       }
    };
 }
 
 Vehicule creerCamionette(char* plaqueImmatriculation, const char* marque, double volumeTransport) {
-   assert(plaqueImmatriculation != NULL && marque != NULL);
+   assert(plaqueImmatriculation);
+   assert(marque);
+   assert(volumeTransport >= 0);
 
    return (Vehicule){
       .marque = marque,
       .plaqueImmatriculation = plaqueImmatriculation,
       .typeVehicule = CAMIONETTE,
-      .specificiteVehicule = {
-         .camionette = {
-            .volumeTransport = volumeTransport
-         }
+      .camionette = {
+         .volumeTransport = volumeTransport
       }
    };
 }
@@ -80,13 +79,13 @@ Vehicule creerCamionette(char* plaqueImmatriculation, const char* marque, double
 int estVoitureStandard(const Vehicule* vehicule) {
    assert(vehicule);
 
-   return vehicule->typeVehicule == VOITURE && vehicule->specificiteVehicule.voiture.typeVoiture == STANDARD;
+   return vehicule->typeVehicule == VOITURE && vehicule->voiture.typeVoiture == STANDARD;
 }
 
 int estVoitureHautDeGamme(const Vehicule* vehicule) {
    assert(vehicule);
 
-   return vehicule->typeVehicule == VOITURE && vehicule->specificiteVehicule.voiture.typeVoiture == HAUT_DE_GAMME;
+   return vehicule->typeVehicule == VOITURE && vehicule->voiture.typeVoiture == HAUT_DE_GAMME;
 }
 
 int estCamionette(const Vehicule* vehicule) {

@@ -19,6 +19,7 @@ Compilateur    : Compilation fonctionnelle avec :
 #define PARKING_VEHICULE_H
 
 #include <inttypes.h> // Requis pour uint16_t
+#include <stdbool.h> // Requis pour bool
 
 typedef uint16_t ui16;
 
@@ -44,14 +45,12 @@ typedef struct { // 4 bytes
    ui16 quantiteRejetCO2;
 } Standard;
 
-typedef union { // 4 bytes
-   HautDeGamme hautDeGamme;
-   Standard    standard;
-} SpecificiteVoiture;
-
 typedef struct { // 12 bytes
    const TypeVoiture typeVoiture;
-   SpecificiteVoiture specificiteVoiture;
+   union {
+      HautDeGamme hautDeGamme;
+      Standard    standard;
+   };
    ui16 poids;
 } Voiture;
 
@@ -59,13 +58,11 @@ typedef struct { // 8 bytes
    double volumeTransport;
 } Camionette;
 
-typedef union { // 12 bytes
-   Voiture voiture;
-   Camionette camionette;
-} SpecificiteVehicule;
-
 typedef struct { // 36 bytes
-   SpecificiteVehicule specificiteVehicule;
+   union {
+      Voiture voiture;
+      Camionette camionette;
+   };
    const char* marque;
    const TypeVehicule typeVehicule;
    char* plaqueImmatriculation;

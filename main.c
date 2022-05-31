@@ -24,12 +24,12 @@ Compilateur    : Compilation fonctionnelle avec :
 
 int main(void) {
    PlaceDeParking parking[] = {
-      { creerVoitureStandard("VD123456", "Fiat", 1130u, 1200u, 125u) },
-      { creerVoitureStandard("JU654321", "Toyota", 1320u, 1430u, 145u) },
-      { creerVoitureStandard("BE011235", "Ford", 1660u, 2200u, 190u) },
-      { creerVoitureHautDeGamme("LU080085", "Rolls-Royce", 2600u, 220u) },
-      { creerVoitureHautDeGamme("ZH420666", "Jaguar", 1660u, 600u) },
-      { creerCamionette("FR987654", "Citroen", 50u) }
+      { .vehicule = creerVoitureStandard("VD123456", "Fiat", 1130u, 1200u, 125u) },
+      { .vehicule = creerVoitureStandard("JU654321", "Toyota", 1320u, 1430u, 145u) },
+      { .vehicule = creerVoitureStandard("BE011235", "Ford", 1660u, 2200u, 190u) },
+      { .vehicule = creerVoitureHautDeGamme("LU080085", "Rolls-Royce", 2600u, 220u) },
+      { .vehicule = creerVoitureHautDeGamme("ZH420666", "Jaguar", 1660u, 600u) },
+      { .vehicule = creerCamionette("FR987654", "Citroen", 50u) }
    };
 
    const size_t NB_PLACE_DE_PARK = sizeof(parking) / sizeof(parking[0]);

@@ -105,10 +105,10 @@ void afficherParking(const PlaceDeParking *parking, const size_t nbPlace) {
 }
 
 // Utilisation de macro afin d'améliorer la lisibilité du code
-#define VOIT_ALIAS placeDeParking->vehicule.specificiteVehicule.voiture
-#define VOIT_STANDARD_ALIAS VOIT_ALIAS.specificiteVoiture.standard
-#define VOIT_HAUT_DE_GAMME_ALIAS VOIT_ALIAS.specificiteVoiture.hautDeGamme
-#define CAMIONETTE_ALIAS placeDeParking->vehicule.specificiteVehicule.camionette
+#define VOIT_ALIAS placeDeParking->vehicule.voiture
+#define VOIT_STANDARD_ALIAS VOIT_ALIAS.standard
+#define VOIT_HAUT_DE_GAMME_ALIAS VOIT_ALIAS.hautDeGamme
+#define CAMIONETTE_ALIAS placeDeParking->vehicule.camionette
 
 void afficherPlaceDeParking(const PlaceDeParking* placeDeParking) {
    assert(placeDeParking);
