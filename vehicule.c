@@ -19,7 +19,7 @@ Compilateur    : Compilation fonctionnelle avec :
 #include <assert.h>   // Requis pour assert
 #include "vehicule.h"
 
-Vehicule voitureStandard(char* plaqueImmatriculation, char* marque, ui16 poids, ui16 cm3Cylindree, ui16 quantiteRejetCO2) {
+Vehicule creerVoitureStandard(char* plaqueImmatriculation, const char* marque, ui16 poids, ui16 cm3Cylindree, ui16 quantiteRejetCO2) {
    assert(plaqueImmatriculation != NULL && marque != NULL);
 
    return (Vehicule){
@@ -29,7 +29,7 @@ Vehicule voitureStandard(char* plaqueImmatriculation, char* marque, ui16 poids, 
       .specificiteVehicule = {
          .voiture = {
             .poids = poids,
-            .typevoiture = STANDARD,
+            .typeVoiture = STANDARD,
             .specificiteVoiture = {
                .standard = {
                   .quantiteRejetCO2 = quantiteRejetCO2,
@@ -41,7 +41,7 @@ Vehicule voitureStandard(char* plaqueImmatriculation, char* marque, ui16 poids, 
    };
 }
 
-Vehicule voitureHautDeGamme(char* plaqueImmatriculation, char* marque, ui16 poids, ui16 puissanceDuMoteur) {
+Vehicule creerVoitureHautDeGamme(char* plaqueImmatriculation, const char* marque, ui16 poids, ui16 puissanceDuMoteur) {
    assert(plaqueImmatriculation != NULL && marque != NULL);
 
    return (Vehicule){
@@ -51,7 +51,7 @@ Vehicule voitureHautDeGamme(char* plaqueImmatriculation, char* marque, ui16 poid
       .specificiteVehicule = {
          .voiture = {
             .poids = poids,
-            .typevoiture = HAUT_DE_GAMME,
+            .typeVoiture = HAUT_DE_GAMME,
             .specificiteVoiture = {
                .hautDeGamme = {
                   .puissanceDuMoteur = puissanceDuMoteur
@@ -62,7 +62,7 @@ Vehicule voitureHautDeGamme(char* plaqueImmatriculation, char* marque, ui16 poid
    };
 }
 
-Vehicule camionette(char* plaqueImmatriculation, char* marque, double volumeTransport) {
+Vehicule creerCamionette(char* plaqueImmatriculation, const char* marque, double volumeTransport) {
    assert(plaqueImmatriculation != NULL && marque != NULL);
 
    return (Vehicule){
@@ -80,13 +80,13 @@ Vehicule camionette(char* plaqueImmatriculation, char* marque, double volumeTran
 int estVoitureStandard(const Vehicule* vehicule) {
    assert(vehicule);
 
-   return vehicule->typeVehicule == VOITURE && vehicule->specificiteVehicule.voiture.typevoiture == STANDARD;
+   return vehicule->typeVehicule == VOITURE && vehicule->specificiteVehicule.voiture.typeVoiture == STANDARD;
 }
 
 int estVoitureHautDeGamme(const Vehicule* vehicule) {
    assert(vehicule);
 
-   return vehicule->typeVehicule == VOITURE && vehicule->specificiteVehicule.voiture.typevoiture == HAUT_DE_GAMME;
+   return vehicule->typeVehicule == VOITURE && vehicule->specificiteVehicule.voiture.typeVoiture == HAUT_DE_GAMME;
 }
 
 int estCamionette(const Vehicule* vehicule) {

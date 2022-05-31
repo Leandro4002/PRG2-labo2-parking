@@ -71,7 +71,10 @@ const StatTaxes calculerStatPlaceDePark(PlaceDeParking *parking, const size_t nb
 }
 
 int taxeAnnuelleDecroissant (const void* a, const void* b) {
-   return ((PlaceDeParking*)b)->taxeAnnuelle - ((PlaceDeParking*)a)->taxeAnnuelle;
+   const PlaceDeParking* placeA = (const PlaceDeParking*)a;
+   const PlaceDeParking* placeB = (const PlaceDeParking*)b;
+   
+   return placeB->taxeAnnuelle - placeA->taxeAnnuelle;
 }
 
 void trierParking(PlaceDeParking *parking, const size_t nbPlace) {
@@ -117,10 +120,10 @@ void afficherPlaceDeParking(const PlaceDeParking* placeDeParking) {
    switch (placeDeParking->vehicule.typeVehicule) {
       case VOITURE:
 
-         printf("Categorie voiture        : %s\n", TYPES_VOITURE[VOIT_ALIAS.typevoiture]);
+         printf("Categorie voiture        : %s\n", TYPES_VOITURE[VOIT_ALIAS.typeVoiture]);
          printf("Poids [kg]               : %" PRIu16 "\n", VOIT_ALIAS.poids);
 
-         switch (VOIT_ALIAS.typevoiture) {
+         switch (VOIT_ALIAS.typeVoiture) {
             case STANDARD:
                printf("Cylindree [cm3]          : %" PRIu16 "\n", VOIT_STANDARD_ALIAS.cm3Cylindree);
                printf("Rejet CO2 [g/km]         : %" PRIu16 "\n", VOIT_STANDARD_ALIAS.quantiteRejetCO2);

@@ -50,7 +50,7 @@ typedef union { // 4 bytes
 } SpecificiteVoiture;
 
 typedef struct { // 12 bytes
-   TypeVoiture typevoiture;
+   const TypeVoiture typeVoiture;
    SpecificiteVoiture specificiteVoiture;
    ui16 poids;
 } Voiture;
@@ -67,16 +67,16 @@ typedef union { // 12 bytes
 typedef struct { // 36 bytes
    SpecificiteVehicule specificiteVehicule;
    const char* marque;
-   TypeVehicule typeVehicule;
+   const TypeVehicule typeVehicule;
    char* plaqueImmatriculation;
 } Vehicule;
 
 // Déclaration des fonctions --------------------------------------------------------------------
-Vehicule voitureStandard(char* plaqueImmatriculation, char* marque, ui16 poids, ui16 cm3Cylindree, ui16 quantiteRejetCO2);
+Vehicule creerVoitureStandard(char* plaqueImmatriculation, const char* marque, ui16 poids, ui16 cm3Cylindree, ui16 quantiteRejetCO2);
 
-Vehicule voitureHautDeGamme(char* plaqueImmatriculation, char* marque, ui16 poids, ui16 puissanceDuMoteur);
+Vehicule creerVoitureHautDeGamme(char* plaqueImmatriculation, const char* marque, ui16 poids, ui16 puissanceDuMoteur);
 
-Vehicule camionette(char* plaqueImmatriculation, char* marque, double volumeTransport);
+Vehicule creerCamionette(char* plaqueImmatriculation, const char* marque, double volumeTransport);
 
 int estVoitureStandard(const Vehicule* vehicule);
 

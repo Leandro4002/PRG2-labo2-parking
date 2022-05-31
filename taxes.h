@@ -22,26 +22,27 @@ Compilateur    : Compilation fonctionnelle avec :
 
 // Constantes --------------------------------------------------------------------------------------
 // Taxes de base
-const double TAXE_BASE_VOITURE_CHF;
-const double TAXE_BASE_CAMIONETTE_CHF;
+static const double TAXE_BASE_VOITURE_CHF = 400.;
+static const double TAXE_BASE_CAMIONETTE_CHF = 700.;
 
 // Taxes spécifiques aux voitures standardes
-const double TAXE_POLLUTION_1; // cylindree en cm3
-const double TAXE_POLLUTION_2; // cylindree en cm3
-const double TAXE_POLLUTION_3; // cylindree en cm3
+static const double TAXE_POLLUTION_1 = 0.;   // cylindree en cm3
+static const double TAXE_POLLUTION_2 = 50.;  // cylindree en cm3
+static const double TAXE_POLLUTION_3 = 0.05; // cylindree en cm3
 
 // Taxes spécifiques aux voitures haut de gamme
-const double TAXE_PUISSANCE_MOTEUR_CHF; // puissance en chevaux
-const double TAXE_HAUTE_PUISSANCE_MOTEUR_CHF; // puissance en chevaux
-const double TAXE_PUISSANCE_POIDS_CHF; // poids en tonnes
+static const double TAXE_PUISSANCE_MOTEUR_CHF = 200.;       // puissance en chevaux
+static const double TAXE_HAUTE_PUISSANCE_MOTEUR_CHF = 300.; // puissance en chevaux
+static const double TAXE_PUISSANCE_POIDS_CHF = 20.;         // poids en tonnes
 
 // Taxes spécifiques aux camionettes
-const double TAXE_CAMIONETTE_PAR_VOLUME_CHF; // volume m3
+static const double TAXE_CAMIONETTE_PAR_VOLUME_CHF = 10.; // volume m3
 
 // Valeurs limites avant d'appliquer certaines taxes
-const ui16   LIMITE_PUISSANCE_MOTEUR_TAXE; // puissance en chevaux
-const ui16   LIMITE_CYLINDREE_TAXE; // cylindree en cm3
-const ui16   LIMITE_CO2_TAXE; // Rejet de CO2 en g/km
+static const ui16   LIMITE_PUISSANCE_MOTEUR_TAXE = 250u; // puissance en chevaux
+static const ui16   LIMITE_CYLINDREE_TAXE = 1400u;       // cylindree en cm3
+static const ui16   LIMITE_CO2_TAXE = 130u;              // Rejet de CO2 en g/km
+
 
 // Déclarations de fonctions ------------------------------------------------------------------------
 double calculerTaxeAnnuelle(const Vehicule* vehicule);
