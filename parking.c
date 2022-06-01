@@ -4,7 +4,7 @@ Nom du fichier : parking.c
 Auteur(s)      : Florian Conti, Léo Zmoos & Leandro Saraiva Maia
 Date creation  : 24.05.2022
 
-Description    : 
+Description    : Ce module permet de manipuler le parking.
 
 Remarque(s)    : Les limites du programme sont :
                   - 
@@ -40,12 +40,12 @@ PlaceDeParking* calculerTaxesAnnuellesParking(Vehicule* vehicule,
    return parking;
 }
 
-const StatTaxes calculerStatPlaceDePark(PlaceDeParking* parking,
+const Stat calculerStatPlaceDePark(PlaceDeParking* parking,
    size_t nbPlace, bool (*estVehicule)(const Vehicule*)) {
    assert(parking);
    assert(estVehicule);
 
-   StatTaxes stat = {};
+   Stat stat = {};
 
    // Extrait les taxes des véhicules filtrés par la fonction passé
    // en paramètre dans un tableau de double
@@ -163,11 +163,3 @@ void afficherPlaceDeParking(const PlaceDeParking* placeDeParking) {
 #undef VOIT_STANDARD_ALIAS
 #undef VOIT_HAUT_DE_GAMME_ALIAS
 #undef CAMIONETTE_ALIAS
-
-void afficherStat(const char* nomStat, const StatTaxes* stat) {
-   printf("%s\n", nomStat);
-   printf("\tTotal      : %.2f\n", stat->somme);
-   printf("\tMoyenne    : %.2f\n", stat->moyenne);
-   printf("\tMediane    : %.2f\n", stat->mediane);
-   printf("\tEcart-type : %.2f\n", stat->ecartType);
-}

@@ -91,3 +91,11 @@ void* trier(const void* donnee, size_t nbDonnee,
 
    return donneeTrie;
 }
+
+void afficherStat(const char* texteStat, const Stat* stat) {
+   printf("%s\n", texteStat);
+   printf("\tTotal      : %.2f\n", stat->somme);
+   printf("\tMoyenne    : %.2f\n", stat->moyenne);
+   printf("\tMediane    : %.2f\n", stat->mediane);
+   printf("\tEcart-type : %.2f\n", stat->ecartType);
+}

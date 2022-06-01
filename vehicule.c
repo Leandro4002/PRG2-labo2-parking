@@ -64,7 +64,7 @@ Vehicule creerVoitureHautDeGamme(char* plaqueImmatriculation,
 }
 
 Vehicule creerCamionette(char* plaqueImmatriculation, const char* marque,
-   double volumeTransport) {
+   typeVolume volumeTransport) {
    assert(plaqueImmatriculation);
    assert(marque);
    assert(volumeTransport >= 0);

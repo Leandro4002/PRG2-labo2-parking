@@ -24,7 +24,9 @@ Compilateur    : Compilation fonctionnelle avec :
 #include <stdlib.h>   // Requis pour size_t
 #include "vehicule.h"
 #include "parking.h"
+#include "statistique.h"
 
+// Constantes pour les messages
 #define TEXTE_STAT_STANDARD "Statistiques des taxes des voiture(s) standard(s):"
 #define TEXTE_STAT_HAUT_DE_GAMME \
 "Statistiques des taxes de(s) voiture(s) haut de gamme:"
@@ -68,11 +70,11 @@ int main(void) {
    afficherParking(parkingTrie, NB_VEHICULES);
 
    // Calcul et affichage des statistiques du parking
-   const StatTaxes statVoitureStandard = calculerStatPlaceDePark(
+   const Stat statVoitureStandard = calculerStatPlaceDePark(
       parkingTrie, NB_VEHICULES, estVoitureStandard);
-   const StatTaxes statVoitureHautDeGamme = calculerStatPlaceDePark(
+   const Stat statVoitureHautDeGamme = calculerStatPlaceDePark(
       parkingTrie, NB_VEHICULES, estVoitureHautDeGamme);
-   const StatTaxes statCamionette = calculerStatPlaceDePark(
+   const Stat statCamionette = calculerStatPlaceDePark(
       parkingTrie, NB_VEHICULES, estCamionette);
    
    free(parkingTrie);

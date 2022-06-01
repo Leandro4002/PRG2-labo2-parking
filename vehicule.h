@@ -21,11 +21,12 @@ Compilateur    : Compilation fonctionnelle avec :
 #include <inttypes.h> // Requis pour uint16_t
 #include <stdbool.h>  // Requis pour bool
 
-// Alias de type
+// Alias de type ---------------------------------------------------------------
 typedef uint16_t typePuissanceMoteur;
 typedef uint16_t typeCylindree;
 typedef uint16_t typeRejetCO2;
 typedef uint16_t typePoids;
+typedef double typeVolume;
 
 // Déclarations des types enum -------------------------------------------------
 typedef enum { VOITURE, CAMIONETTE } TypeVehicule;
@@ -36,20 +37,16 @@ static const char* TYPES_VEHICULE[] = { "Voiture", "Camionette" };
 static const char* TYPES_VOITURE[] = { "Standard", "Haut de gamme" };
 
 // Déclaration des unions et structures-----------------------------------------
-// A côté de chaque structure il y a un commentaire indiquant la taille
-// que va prendre la structure en mémoire.
-// Cela dépend du compilateur mais les tailles indiqué sont les plus probables.
-
-typedef struct { // 2 bytes
+typedef struct {
    typePuissanceMoteur puissanceDuMoteur; // Chevaux (CV)
 } HautDeGamme;
 
-typedef struct { // 4 bytes
+typedef struct {
    typeCylindree cylindree; // cm3
    typeRejetCO2 quantiteRejetCO2; // g/km
 } Standard;
 
-typedef struct { // 12 bytes
+typedef struct {
    const TypeVoiture typeVoiture;
    union {
       HautDeGamme hautDeGamme;
@@ -58,34 +55,40 @@ typedef struct { // 12 bytes
    typePoids poids; // kg
 } Voiture;
 
-typedef struct { // 8 bytes
-   double volumeTransport; // m3
+typedef struct {
+   typeVolume volumeTransport; // m3
 } Camionette;
 
-typedef struct { // 36 bytes
+typedef struct {
+   const char* marque;
+   char* plaqueImmatriculation;
    union {
       Voiture voiture;
       Camionette camionette;
    };
-   const char* marque;
    const TypeVehicule typeVehicule;
-   char* plaqueImmatriculation;
 } Vehicule;
 
 // Déclaration des fonctions ---------------------------------------------------
+// Constructeur pour voiture standard
 Vehicule creerVoitureStandard(char* plaqueImmatriculation, const char* marque,
    typePoids poids, typeCylindree cylindree, typeRejetCO2 quantiteRejetCO2);
 
+// Constructeur pour voiture haut de gamme
 Vehicule creerVoitureHautDeGamme(char* plaqueImmatriculation,
    const char* marque, typePoids poids, typePuissanceMoteur puissanceDuMoteur);
 
+// Constructeur pour camionette
 Vehicule creerCamionette(char* plaqueImmatriculation, const char* marque,
-   double volumeTransport);
+   typeVolume volumeTransport);
 
+// Détermine si le véhicule passé en paramètre est une voiture standard
 bool estVoitureStandard(const Vehicule* vehicule);
 
+// Détermine si le véhicule passé en paramètre est une voiture haut de gamme
 bool estVoitureHautDeGamme(const Vehicule* vehicule);
 
+// Détermine si le véhicule passé en paramètre est une camionette
 bool estCamionette(const Vehicule* vehicule);
 
 #endif // PRG2_LABO_2_VEHICULE_H

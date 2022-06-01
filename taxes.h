@@ -47,6 +47,7 @@ static const typeCylindree       LIMITE_CYLINDREE_TAXE = 1400u;
 static const typeRejetCO2        LIMITE_CO2_TAXE = 130u;
 
 // Déclarations de fonctions ---------------------------------------------------
+// Calcul le montant de la taxe annelle pour un véhicule donné
 double calculerTaxeAnnuelle(const Vehicule* vehicule);
 
 #endif // PRG2_LABO_2_TAXES_H
