@@ -39,9 +39,9 @@ static const double TAXE_PUISSANCE_POIDS_CHF = 20.;         // poids en tonnes
 static const double TAXE_CAMIONETTE_PAR_VOLUME_CHF = 10.; // volume m3
 
 // Valeurs limites avant d'appliquer certaines taxes
-static const ui   LIMITE_PUISSANCE_MOTEUR_TAXE = 250u; // puissance en chevaux
-static const ui   LIMITE_CYLINDREE_TAXE = 1400u;       // cylindree en cm3
-static const ui   LIMITE_CO2_TAXE = 130u;              // Rejet de CO2 en g/km
+static const ui     LIMITE_PUISSANCE_MOTEUR_TAXE = 250u; // puissance en chevaux
+static const ui     LIMITE_CYLINDREE_TAXE = 1400u;       // cylindree en cm3
+static const ui     LIMITE_CO2_TAXE = 130u;              // Rejet de CO2 en g/km
 
 // Déclarations de fonctions ---------------------------------------------------
 double calculerTaxeAnnuelle(const Vehicule* vehicule);

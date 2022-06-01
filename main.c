@@ -20,6 +20,7 @@ Compilateur    : Compilation fonctionnelle avec :
 --------------------------------------------------------------------------------
 */
 
+#include <stdlib.h>   // Requis pour size_t
 #include "vehicule.h"
 #include "parking.h"
 
@@ -59,4 +60,6 @@ int main(void) {
 
    // Libère la mémoire du parking
    free(parking);
+
+   return EXIT_SUCCESS;
 }

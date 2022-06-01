@@ -65,7 +65,13 @@ int taxeAnnuelleDecroissant (const void* a, const void* b) {
    const PlaceDeParking* placeA = (const PlaceDeParking*)a;
    const PlaceDeParking* placeB = (const PlaceDeParking*)b;
    
-   return placeB->taxeAnnuelle - placeA->taxeAnnuelle;
+   if (placeA->taxeAnnuelle > placeB->taxeAnnuelle) {
+      return -1;
+   } else if (placeA->taxeAnnuelle < placeB->taxeAnnuelle) {
+      return 1;
+   } else {
+      return 0;
+   }
 }
 
 void trierParking(PlaceDeParking *parking, size_t nbPlace) {
