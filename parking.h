@@ -19,6 +19,7 @@ Compilateur    : Compilation fonctionnelle avec :
 #define PRG2_LABO_2_PARKING_H
 
 #include <stdlib.h>  // Requis pour size_t
+#include <stdbool.h> // Requis pour bool
 #include "vehicule.h"
 
 typedef struct {

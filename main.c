@@ -31,7 +31,7 @@ int main(void) {
       creerVoitureHautDeGamme("LU080085", "Rolls-Royce", 2600u, 220u),
       creerVoitureHautDeGamme("GR343112", "Porsche", 1400u, 250u),
       creerVoitureHautDeGamme("ZH420666", "Jaguar", 1660u, 600u),
-      creerCamionette("FR987654", "Citroen", 10u),
+      creerCamionette("FR987654", "Citroen", 10.),
    };
 
    const size_t NB_VEHICULES = sizeof(vehicules) / sizeof(vehicules[0]);
