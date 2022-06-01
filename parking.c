@@ -1,7 +1,7 @@
 /*
------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 Nom du fichier : parking.c
-Auteur(s)      : Florian conti, Léo Zmoos & Leandro Saraiva Maia
+Auteur(s)      : Florian Conti, Léo Zmoos & Leandro Saraiva Maia
 Date creation  : 24.05.2022
 
 Description    : 
@@ -12,7 +12,7 @@ Remarque(s)    : Les limites du programme sont :
 Compilateur    : Compilation fonctionnelle avec :
                   - Mingw-w64 gcc 11.2.0
                   - gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0
------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 */
 
 #include <stdio.h>   // Requis pour printf
@@ -22,7 +22,8 @@ Compilateur    : Compilation fonctionnelle avec :
 #include "parking.h"
 #include "taxes.h"
 
-PlaceDeParking* calculerTaxesAnnuellesParking(Vehicule *vehicule, size_t nbPlace) {
+PlaceDeParking* calculerTaxesAnnuellesParking(Vehicule *vehicule,
+   size_t nbPlace) {
    assert(vehicule);
    assert(nbPlace > 0);
 
@@ -36,7 +37,9 @@ PlaceDeParking* calculerTaxesAnnuellesParking(Vehicule *vehicule, size_t nbPlace
    return parking;
 }
 
-const StatTaxes calculerStatPlaceDePark(PlaceDeParking *parking, size_t nbPlace, int (*estVehicule)(const Vehicule *)) {
+// TODO Refaire le calcul de statistiques
+const StatTaxes calculerStatPlaceDePark(PlaceDeParking *parking,
+   size_t nbPlace, bool (*estVehicule)(const Vehicule *)) {
    StatTaxes stat = {};
    double sommeDesCarres = 0.;
 
@@ -117,31 +120,39 @@ void afficherParking(const PlaceDeParking *parking, size_t nbPlace) {
 void afficherPlaceDeParking(const PlaceDeParking* placeDeParking) {
    assert(placeDeParking);
 
-   printf("Type                     : %s\n", TYPES_VEHICULE[placeDeParking->vehicule->typeVehicule]);
-   printf("Marque                   : %s\n", placeDeParking->vehicule->marque);
-   printf("Plaque                   : %s\n", placeDeParking->vehicule->plaqueImmatriculation);
+   printf("Type                     : %s\n",
+      TYPES_VEHICULE[placeDeParking->vehicule->typeVehicule]);
+   printf("Marque                   : %s\n",
+      placeDeParking->vehicule->marque);
+   printf("Plaque                   : %s\n",
+      placeDeParking->vehicule->plaqueImmatriculation);
 
    switch (placeDeParking->vehicule->typeVehicule) {
       case VOITURE:
 
-         printf("Categorie voiture        : %s\n", TYPES_VOITURE[VOIT_ALIAS.typeVoiture]);
+         printf("Categorie voiture        : %s\n",
+            TYPES_VOITURE[VOIT_ALIAS.typeVoiture]);
          printf("Poids [kg]               : %" PRIu16 "\n", VOIT_ALIAS.poids);
 
          switch (VOIT_ALIAS.typeVoiture) {
             case STANDARD:
-               printf("Cylindree [cm3]          : %" PRIu16 "\n", VOIT_STANDARD_ALIAS.cm3Cylindree);
-               printf("Rejet CO2 [g/km]         : %" PRIu16 "\n", VOIT_STANDARD_ALIAS.quantiteRejetCO2);
+               printf("Cylindree [cm3]          : %" PRIu16 "\n",
+                  VOIT_STANDARD_ALIAS.cylindree);
+               printf("Rejet CO2 [g/km]         : %" PRIu16 "\n",
+                  VOIT_STANDARD_ALIAS.quantiteRejetCO2);
                break;
 
             case HAUT_DE_GAMME:
-               printf("Puissance moteur [CV]    : %" PRIu16 "\n", VOIT_HAUT_DE_GAMME_ALIAS.puissanceDuMoteur);
+               printf("Puissance moteur [CV]    : %" PRIu16 "\n",
+                  VOIT_HAUT_DE_GAMME_ALIAS.puissanceDuMoteur);
                break;
             default: break;
          }
          break;
 
       case CAMIONETTE:
-         printf("Volume de transport [m3] : %.2f\n", CAMIONETTE_ALIAS.volumeTransport);
+         printf("Volume de transport [m3] : %.2f\n",
+            CAMIONETTE_ALIAS.volumeTransport);
          break;
 
       default: break;
