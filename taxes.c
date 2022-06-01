@@ -4,19 +4,19 @@ Nom du fichier : taxes.c
 Auteur(s)      : Florian Conti, Léo Zmoos & Leandro Saraiva Maia
 Date creation  : 24.05.2022
 
-Description    : 
-
-Remarque(s)    : Les limites du programme sont :
-                  - 
+Remarque(s)    : Lors du calcul de taxe, on retourne 0 quand le type de véhicule
+                 n'est pas pris en charge. Il y a une fonction par type de
+                 véhicule pour calculer la taxe, lors de l'ajout d'un type, il
+                 suffira d'ajouter une fonction et de l'utiliser au bon endroit.
+                 Il y a beaucoup de fonctions qui ne sont pas exposés et qui
+                 sont nécessaires uniquement en interne.
 
 Compilateur    : Compilation fonctionnelle avec :
-                  - Mingw-w64 gcc 11.2.0
                   - gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0
 --------------------------------------------------------------------------------
 */
 
 #include <assert.h> // Requis pour assert
-#include <math.h>   // Requis pour INFINITY
 #include "taxes.h"
 
 // Prédéclarations de fonctions internes
@@ -35,9 +35,7 @@ double calculerTaxeAnnuelle(const Vehicule* vehicule) {
       case CAMIONETTE:
          return calculerTaxeCamionette(vehicule);
       default:
-         // On retourne -l'infine pour indiquer que le type n'est pas
-         // pris en charge.
-         return -INFINITY;
+         return 0;
    }
 }
 
@@ -82,6 +80,7 @@ double calculerTaxeVoiture(const Vehicule* vehicule) {
    // Taxe de base
    montant += TAXE_BASE_VOITURE_CHF;
 
+   // Taxe spécifique
    switch (vehicule->voiture.typeVoiture) {
       case STANDARD:
          montant += calculerTaxeVoitureStandard(vehicule);

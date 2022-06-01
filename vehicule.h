@@ -4,13 +4,18 @@ Nom du fichier : vehicule.h
 Auteur(s)      : Florian Conti, Léo Zmoos & Leandro Saraiva Maia
 Date creation  : 24.05.2022
 
-Description    : 
-
-Remarque(s)    : Les limites du programme sont :
-                  - 
+Description    : Ce module modélise les différents véhicules du parking. On a
+                 une structure générique de base représentant n'importe quel
+                 véhicule.
+                 On distingue ensuite les différents types de véhicules via
+                 des unions et des structures de type Voiture, Camionette, etc
+                 (on peut en rajouter au besoin).
+                 Ce module fournit également des constructeurs afin de créer ces
+                 différents types de véhicules plus facilement ainsi que des
+                 fonctions permettant de tester si un véhicule est d'un certain
+                 type.
 
 Compilateur    : Compilation fonctionnelle avec :
-                  - Mingw-w64 gcc 11.2.0
                   - gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0
 --------------------------------------------------------------------------------
 */
@@ -33,6 +38,8 @@ typedef enum { VOITURE, CAMIONETTE } TypeVehicule;
 typedef enum { STANDARD, HAUT_DE_GAMME } TypeVoiture;
 
 // Déclarations des tableaux de noms -------------------------------------------
+// Utile pour l'affichage des enums (l'index des enums correspont à l'index des
+// noms dans ces tableaux)
 static const char* TYPES_VEHICULE[] = { "Voiture", "Camionette" };
 static const char* TYPES_VOITURE[] = { "Standard", "Haut de gamme" };
 

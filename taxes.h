@@ -4,13 +4,12 @@ Nom du fichier : taxes.h
 Auteur(s)      : Florian Conti, Léo Zmoos & Leandro Saraiva Maia
 Date creation  : 24.05.2022
 
-Description    : 
-
-Remarque(s)    : Les limites du programme sont :
-                  - 
+Description    : Ce fichier contient les constantes utilisé pour le calcul
+                 des taxes. Le calcul des taxes se fait selon des règles
+                 différentes selon le type de véhicules et certaine
+                 caractéristiques.
 
 Compilateur    : Compilation fonctionnelle avec :
-                  - Mingw-w64 gcc 11.2.0
                   - gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0
 --------------------------------------------------------------------------------
 */

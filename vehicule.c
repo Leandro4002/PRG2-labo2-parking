@@ -4,13 +4,9 @@ Nom du fichier : vehicule.c
 Auteur(s)      : Florian Conti, Léo Zmoos & Leandro Saraiva Maia
 Date creation  : 24.05.2022
 
-Description    : 
-
-Remarque(s)    : Les limites du programme sont :
-                  - 
+Remarque(s)    : -
 
 Compilateur    : Compilation fonctionnelle avec :
-                  - Mingw-w64 gcc 11.2.0
                   - gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0
 --------------------------------------------------------------------------------
 */
@@ -67,7 +63,7 @@ Vehicule creerCamionette(char* plaqueImmatriculation, const char* marque,
    typeVolume volumeTransport) {
    assert(plaqueImmatriculation);
    assert(marque);
-   assert(volumeTransport >= 0);
+   assert(volumeTransport > 0);
 
    return (Vehicule){
       .marque = marque,

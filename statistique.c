@@ -4,13 +4,12 @@ Nom du fichier : statistique.c
 Auteur(s)      : Florian Conti, Léo Zmoos & Leandro Saraiva Maia
 Date creation  : 01.06.2022
 
-Description    : 
-
-Remarque(s)    : Les limites du programme sont :
-                  - 
+Remarque(s)    : A chaque appel de fonction, on refait une itération complète
+                 du tableau. Si la performance est importante, appeler ces
+                 fonctions successivements pour remplir la structure Stat n'est
+                 pas très judicieux.
 
 Compilateur    : Compilation fonctionnelle avec :
-                  - Mingw-w64 gcc 11.2.0
                   - gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0
 --------------------------------------------------------------------------------
 */
@@ -18,6 +17,7 @@ Compilateur    : Compilation fonctionnelle avec :
 #include <assert.h>  // requis pour assert
 #include <math.h>    // requis pour sqrt
 #include <string.h>  // requis pour memcpy
+#include <stdio.h>   // requis pour printf
 #include "statistique.h"
 
 double somme(const double* donnee, size_t nbDonnee) {

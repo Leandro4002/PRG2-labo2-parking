@@ -1,16 +1,17 @@
 /*
 --------------------------------------------------------------------------------
-Nom du fichier : statistique.c
+Nom du fichier : statistique.h
 Auteur(s)      : Florian Conti, Léo Zmoos & Leandro Saraiva Maia
 Date creation  : 01.06.2022
 
-Description    : 
-
-Remarque(s)    : Les limites du programme sont :
-                  - 
+Description    : Ce module permet de calculer les statistiques d'un tableau de
+                 double. Il est également fourni avec une fonction pour trier
+                 un tableau de double (nécessaire pour la médiane).
+                 Une structure Stat est fourni afin de stocker les informations
+                 statistiques. Une fonction permet d'afficher cette structure
+                 proprement.
 
 Compilateur    : Compilation fonctionnelle avec :
-                  - Mingw-w64 gcc 11.2.0
                   - gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0
 --------------------------------------------------------------------------------
 */

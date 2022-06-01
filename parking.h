@@ -4,13 +4,14 @@ Nom du fichier : parking.h
 Auteur(s)      : Florian Conti, Léo Zmoos & Leandro Saraiva Maia
 Date creation  : 24.05.2022
 
-Description    : 
-
-Remarque(s)    : Les limites du programme sont :
-                  - 
+Description    : Ce module modèlise un parking de véhicules. Il définit une
+                 permettant d'associer une taxe à un véhicule, cette structure
+                 sera celle utilisé dans les fonctions de ce module.
+                 Ce module permet d'effectuer diverses opérations sur le parking
+                 en appelant d'autre module (taxes et statistique). C'est un
+                 module qui sert d'interface entre les modules.
 
 Compilateur    : Compilation fonctionnelle avec :
-                  - Mingw-w64 gcc 11.2.0
                   - gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0
 --------------------------------------------------------------------------------
 */
@@ -30,7 +31,10 @@ typedef struct {
 } PlaceDeParking;
 
 // Déclarations de fonctions ---------------------------------------------------
-// Fonction qui calcule les taxes annuelles des véhicules d'un parking
+// Calcule les taxes annuelles des véhicules d'un parking.
+// Cette fonction alloue de la mémoire pour le tableau de PlaceDeParking et
+// retourne un pointeur vers ce tableau. Il faut donc penser à libérer la
+// mémoire quand on n'en a plus besoin.
 PlaceDeParking* calculerTaxesAnnuellesParking(Vehicule* parking,
    size_t nbPlace);
 
@@ -40,11 +44,13 @@ const Stat calculerStatPlaceDePark(PlaceDeParking* parking,
    size_t nbPlace, bool (*estVehicule)(const Vehicule*));
 
 // Fonction de comparaison binaire utilisée pour trier
-// les places de parking par ordre
+// les places de parking par ordre décroissant.
 int taxeAnnuelleDecroissant (const void* a, const void* b);
 
 // Génère un tableau de nbPlace place de parking triées selon la fonction
-// passée en paramètre
+// passée en paramètre. Cette fonction alloue de la mémoire pour le tableau
+// et retourne un pointeur vers ce tableau. Il faut donc penser à libérer
+// la mémoire quand on n'en a plus besoin.
 PlaceDeParking* trierParking(PlaceDeParking* parking,
    size_t nbPlace, int (*comparer)(const void*, const void*));
 

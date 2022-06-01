@@ -4,13 +4,11 @@ Nom du fichier : parking.c
 Auteur(s)      : Florian Conti, Léo Zmoos & Leandro Saraiva Maia
 Date creation  : 24.05.2022
 
-Description    : Ce module permet de manipuler le parking.
-
-Remarque(s)    : Les limites du programme sont :
-                  - 
+Remarque(s)    : La fonction calcul de taxes et de trie crée une copie du
+                 tableau passé en paramètre, il faut bien penser à libérer la
+                 mémoire après utilisation.
 
 Compilateur    : Compilation fonctionnelle avec :
-                  - Mingw-w64 gcc 11.2.0
                   - gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0
 --------------------------------------------------------------------------------
 */

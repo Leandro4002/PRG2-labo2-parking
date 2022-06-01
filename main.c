@@ -9,13 +9,12 @@ Description    : Ce programme permet de modéliser un parking ainsi que les
                  voitures qui s'y trouvent. Ce programme calcule également
                  le montant des taxes pour les véhicules se trouvant dans
                  le parking. Le calcul des taxes est différent pour chaque
-                 catégorie de véhicule et selon divers critères.
-
-Remarque(s)    : Les limites du programme sont :
-                  - 
+                 catégorie de véhicule et selon divers critères. Les
+                 véhicules sont ensuite trié par montant de taxe décroissant.
+                 On affiche ensuite les caractéristiques et les statistiques
+                 de tout les véhicules sur le parking.
 
 Compilateur    : Compilation fonctionnelle avec :
-                  - Mingw-w64 gcc 11.2.0
                   - gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0
 --------------------------------------------------------------------------------
 */
