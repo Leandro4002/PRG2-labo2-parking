@@ -21,7 +21,11 @@ Compilateur    : Compilation fonctionnelle avec :
 #include <inttypes.h> // Requis pour uint16_t
 #include <stdbool.h>  // Requis pour bool
 
-typedef uint16_t ui;
+// Alias de type
+typedef uint16_t typePuissanceMoteur;
+typedef uint16_t typeCylindree;
+typedef uint16_t typeRejetCO2;
+typedef uint16_t typePoids;
 
 // Déclarations des types enum -------------------------------------------------
 typedef enum { VOITURE, CAMIONETTE } TypeVehicule;
@@ -37,12 +41,12 @@ static const char* TYPES_VOITURE[] = { "Standard", "Haut de gamme" };
 // Cela dépend du compilateur mais les tailles indiqué sont les plus probables.
 
 typedef struct { // 2 bytes
-   ui puissanceDuMoteur; // Chevaux (CV)
+   typePuissanceMoteur puissanceDuMoteur; // Chevaux (CV)
 } HautDeGamme;
 
 typedef struct { // 4 bytes
-   ui cylindree; // cm3
-   ui quantiteRejetCO2; // g/km
+   typeCylindree cylindree; // cm3
+   typeRejetCO2 quantiteRejetCO2; // g/km
 } Standard;
 
 typedef struct { // 12 bytes
@@ -51,7 +55,7 @@ typedef struct { // 12 bytes
       HautDeGamme hautDeGamme;
       Standard    standard;
    };
-   ui poids; // kg
+   typePoids poids; // kg
 } Voiture;
 
 typedef struct { // 8 bytes
@@ -70,10 +74,10 @@ typedef struct { // 36 bytes
 
 // Déclaration des fonctions ---------------------------------------------------
 Vehicule creerVoitureStandard(char* plaqueImmatriculation, const char* marque,
-   ui poids, ui cylindree, ui quantiteRejetCO2);
+   typePoids poids, typeCylindree cylindree, typeRejetCO2 quantiteRejetCO2);
 
 Vehicule creerVoitureHautDeGamme(char* plaqueImmatriculation,
-   const char* marque, ui poids, ui puissanceDuMoteur);
+   const char* marque, typePoids poids, typePuissanceMoteur puissanceDuMoteur);
 
 Vehicule creerCamionette(char* plaqueImmatriculation, const char* marque,
    double volumeTransport);

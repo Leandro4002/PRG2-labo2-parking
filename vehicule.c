@@ -19,7 +19,7 @@ Compilateur    : Compilation fonctionnelle avec :
 #include "vehicule.h"
 
 Vehicule creerVoitureStandard(char* plaqueImmatriculation, const char* marque,
-   ui poids, ui cylindree, ui quantiteRejetCO2) {
+   typePoids poids, typeCylindree cylindree, typeRejetCO2 quantiteRejetCO2) {
    assert(plaqueImmatriculation);
    assert(marque);
    assert(poids > 0);
@@ -43,7 +43,7 @@ Vehicule creerVoitureStandard(char* plaqueImmatriculation, const char* marque,
 }
 
 Vehicule creerVoitureHautDeGamme(char* plaqueImmatriculation,
-   const char* marque, ui poids, ui puissanceDuMoteur) {
+   const char* marque, typePoids poids, typePuissanceMoteur puissanceDuMoteur) {
    assert(plaqueImmatriculation);
    assert(marque);
    assert(poids > 0);
