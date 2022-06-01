@@ -17,9 +17,10 @@ Compilateur    : Compilation fonctionnelle avec :
 
 #include <assert.h>  // requis pour assert
 #include <math.h>    // requis pour sqrt
+#include <string.h>  // requis pour memcpy
 #include "statistique.h"
 
-double somme(const double* const donnee, size_t nbDonnee) {
+double somme(const double* donnee, size_t nbDonnee) {
    assert(donnee);
 
    if (!nbDonnee) return 0.;
@@ -33,7 +34,7 @@ double somme(const double* const donnee, size_t nbDonnee) {
    return total;
 }
 
-double moyenne(const double* const donnee, size_t nbDonnee) {
+double moyenne(const double* donnee, size_t nbDonnee) {
    assert(donnee);
 
    if (!nbDonnee) return 0.;
@@ -41,7 +42,7 @@ double moyenne(const double* const donnee, size_t nbDonnee) {
    return somme(donnee, nbDonnee) / nbDonnee;
 }
 
-double mediane(const double* const donnee, size_t nbDonnee) {
+double mediane(const double* donnee, size_t nbDonnee) {
    assert(donnee);
    
    if (!nbDonnee) return 0.;
@@ -50,7 +51,7 @@ double mediane(const double* const donnee, size_t nbDonnee) {
       (donnee[nbDonnee / 2] + donnee[nbDonnee / 2 + 1]) / 2;
 }
 
-double ecartType(const double* const donnee, size_t nbDonnee) {
+double ecartType(const double* donnee, size_t nbDonnee) {
    assert(donnee);
 
    if (!nbDonnee) return 0.;
@@ -67,4 +68,26 @@ double ecartType(const double* const donnee, size_t nbDonnee) {
    // et le carré de la moyenne
    // L'écart type est égale à la racine carré de la variance
    return sqrt(sommeDesCarree / nbDonnee - moy * moy);
+}
+
+void* trier(const void* donnee, size_t nbDonnee,
+   int (*comparer)(const void*, const void*), size_t tailleElem) {
+   assert(donnee);
+   assert(comparer);
+   assert(tailleElem > 0);
+
+   if (!nbDonnee) return NULL;
+
+   // On crée un nouveau tableau pour les données triées
+   void* donneeTrie = calloc(nbDonnee, tailleElem);
+
+   if (!donneeTrie) return NULL;
+
+   // On copie les données dans le tableau de données triées
+   memcpy(donneeTrie, donnee, nbDonnee * tailleElem);
+
+   // On trie le tableau de données triées
+   qsort(donneeTrie, nbDonnee, tailleElem, comparer);
+
+   return donneeTrie;
 }

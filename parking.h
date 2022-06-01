@@ -38,7 +38,7 @@ PlaceDeParking* calculerTaxesAnnuellesParking(Vehicule* parking,
 const StatTaxes calculerStatPlaceDePark(PlaceDeParking* parking,
    size_t nbPlace, bool (*estVehicule)(const Vehicule *));
 
-void trierParking(PlaceDeParking* parking, size_t nbPlace);
+PlaceDeParking* trierParking(PlaceDeParking* parking, size_t nbPlace);
 
 void afficherParking(const PlaceDeParking* parking, size_t nbPlace);
 

@@ -27,8 +27,11 @@ PlaceDeParking* calculerTaxesAnnuellesParking(Vehicule *vehicule,
    assert(vehicule);
    assert(nbPlace > 0);
 
-   PlaceDeParking* parking = calloc(nbPlace, sizeof(PlaceDeParking));
+   PlaceDeParking* parking =
+      (PlaceDeParking*)calloc(nbPlace, sizeof(PlaceDeParking));
    
+   if (!parking) return NULL;
+
    for (size_t i = 0; i < nbPlace; ++i) {
       parking[i].vehicule = vehicule + i;
       parking[i].taxeAnnuelle = calculerTaxeAnnuelle(vehicule + i);
@@ -37,9 +40,11 @@ PlaceDeParking* calculerTaxesAnnuellesParking(Vehicule *vehicule,
    return parking;
 }
 
-// TODO Refaire le calcul de statistiques
-const StatTaxes calculerStatPlaceDePark(PlaceDeParking *parking,
-   size_t nbPlace, bool (*estVehicule)(const Vehicule *)) {
+const StatTaxes calculerStatPlaceDePark(PlaceDeParking* parking,
+   size_t nbPlace, bool (*estVehicule)(const Vehicule*)) {
+   assert(parking);
+   assert(estVehicule);
+
    StatTaxes stat = {};
 
    // Extrait les taxes des véhicules filtrés par la fonction passé
@@ -64,20 +69,18 @@ const StatTaxes calculerStatPlaceDePark(PlaceDeParking *parking,
 int taxeAnnuelleDecroissant (const void* a, const void* b) {
    const PlaceDeParking* placeA = (const PlaceDeParking*)a;
    const PlaceDeParking* placeB = (const PlaceDeParking*)b;
-   
-   if (placeA->taxeAnnuelle > placeB->taxeAnnuelle) {
-      return -1;
-   } else if (placeA->taxeAnnuelle < placeB->taxeAnnuelle) {
-      return 1;
-   } else {
-      return 0;
-   }
+
+   return placeA->taxeAnnuelle > placeB->taxeAnnuelle ? -1 :
+      placeA->taxeAnnuelle < placeB->taxeAnnuelle ? 1 : 0;
 }
 
-void trierParking(PlaceDeParking *parking, size_t nbPlace) {
+PlaceDeParking* trierParking(PlaceDeParking *parking, size_t nbPlace) {
    assert(parking);
+   
+   if (!nbPlace) return NULL;
 
-   qsort(parking, nbPlace, sizeof(PlaceDeParking), taxeAnnuelleDecroissant);
+   return (PlaceDeParking*)trier((void*)parking, nbPlace,
+      taxeAnnuelleDecroissant, sizeof(PlaceDeParking));
 }
 
 void afficherParking(const PlaceDeParking *parking, size_t nbPlace) {

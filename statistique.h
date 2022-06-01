@@ -20,12 +20,15 @@ Compilateur    : Compilation fonctionnelle avec :
 
 #include <stdlib.h> // requis pour size_t
 
-double somme(const double* const donnee, size_t nbDonnee);
+double somme(const double* donnee, size_t nbDonnee);
 
-double moyenne(const double* const donnee, size_t nbDonnee);
+double moyenne(const double* donnee, size_t nbDonnee);
 
-double mediane(const double* const donnee, size_t nbDonnee);
+double mediane(const double* donnee, size_t nbDonnee);
 
-double ecartType(const double* const donnee, size_t nbDonnee);
+double ecartType(const double* donnee, size_t nbDonnee);
+
+void* trier(const void* donnee, size_t nbDonnee,
+   int (*comparer)(const void*, const void*), size_t tailleElem);
 
 #endif // PRG2_LABO_2_STAT_H

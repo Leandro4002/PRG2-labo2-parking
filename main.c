@@ -20,9 +20,17 @@ Compilateur    : Compilation fonctionnelle avec :
 --------------------------------------------------------------------------------
 */
 
+#include <stdio.h>    // Requis pour printf
 #include <stdlib.h>   // Requis pour size_t
 #include "vehicule.h"
 #include "parking.h"
+
+#define TEXTE_STAT_STANDARD "Statistiques des taxes des voiture(s) standard(s):"
+#define TEXTE_STAT_HAUT_DE_GAMME \
+"Statistiques des taxes de(s) voiture(s) haut de gamme:"
+#define TEXTE_STAT_CAMIONETTE "Statistiques des taxes de(s) camionette(s):"
+
+#define MSR_ERR_ALLOC_MEMOIRE "Erreur d'allocation de mémoire."
 
 int main(void) {
    Vehicule vehicules[] = {
@@ -37,29 +45,41 @@ int main(void) {
 
    const size_t NB_VEHICULES = sizeof(vehicules) / sizeof(vehicules[0]);
 
-   // Calcul de taxes et affichage du parking
+   // Calcul de taxes, tri et affichage du parking
    PlaceDeParking* parking =
       calculerTaxesAnnuellesParking(vehicules, NB_VEHICULES);
-   trierParking(parking, NB_VEHICULES);
-   afficherParking(parking, NB_VEHICULES);
+   
+   if (!parking) {
+      printf(MSR_ERR_ALLOC_MEMOIRE);
+      return EXIT_FAILURE;
+   }
+
+   PlaceDeParking* parkingTrie = trierParking(parking, NB_VEHICULES);
+
+   if (!parkingTrie) {
+      printf(MSR_ERR_ALLOC_MEMOIRE);
+      return EXIT_FAILURE;
+   }
+
+   free(parking);
+   parking = NULL;
+
+   afficherParking(parkingTrie, NB_VEHICULES);
 
    // Calcul et affichage des statistiques du parking
-   const StatTaxes statVoitureStandard =
-   calculerStatPlaceDePark(parking, NB_VEHICULES, estVoitureStandard);
-   const StatTaxes statVoitureHautDeGamme =
-      calculerStatPlaceDePark(parking, NB_VEHICULES, estVoitureHautDeGamme);
-   const StatTaxes statCamionette =
-      calculerStatPlaceDePark(parking, NB_VEHICULES, estCamionette);
+   const StatTaxes statVoitureStandard = calculerStatPlaceDePark(
+      parkingTrie, NB_VEHICULES, estVoitureStandard);
+   const StatTaxes statVoitureHautDeGamme = calculerStatPlaceDePark(
+      parkingTrie, NB_VEHICULES, estVoitureHautDeGamme);
+   const StatTaxes statCamionette = calculerStatPlaceDePark(
+      parkingTrie, NB_VEHICULES, estCamionette);
+   
+   free(parkingTrie);
+   parkingTrie = NULL;
 
-   afficherStat("Statistiques des taxes des voitures standards:",
-      &statVoitureStandard);
-   afficherStat("\nStatistiques des taxes des voitures haut de gamme:",
-      &statVoitureHautDeGamme);
-   afficherStat("\nStatistiques des taxes des camionettes:",
-      &statCamionette);
-
-   // Libère la mémoire du parking
-   free(parking);
+   afficherStat(TEXTE_STAT_STANDARD, &statVoitureStandard);
+   afficherStat("\n" TEXTE_STAT_HAUT_DE_GAMME, &statVoitureHautDeGamme);
+   afficherStat("\n" TEXTE_STAT_CAMIONETTE, &statCamionette);
 
    return EXIT_SUCCESS;
 }
