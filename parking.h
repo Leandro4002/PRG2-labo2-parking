@@ -22,7 +22,7 @@ Compilateur    : Compilation fonctionnelle avec :
 #include "vehicule.h"
 
 typedef struct {
-	Vehicule vehicule;
+	Vehicule* vehicule;
 	double taxeAnnuelle;
 } PlaceDeParking;
 
@@ -31,13 +31,13 @@ typedef struct {
 	double somme, mediane, moyenne, ecartType;
 } StatTaxes;
 
-void calculerTaxesAnnuellesParking(PlaceDeParking *parking, const size_t nbPlace);
+PlaceDeParking* calculerTaxesAnnuellesParking(Vehicule* parking, size_t nbPlace);
 
-const StatTaxes calculerStatPlaceDePark(PlaceDeParking *parking, const size_t nbPlace, const int (*estVehicule)(const Vehicule *));
+const StatTaxes calculerStatPlaceDePark(PlaceDeParking* parking, size_t nbPlace, int (*estVehicule)(const Vehicule *));
 
-void trierParking(PlaceDeParking *parking, const size_t nbPlace);
+void trierParking(PlaceDeParking* parking, size_t nbPlace);
 
-void afficherParking(const PlaceDeParking *parking, const size_t nbPlace);
+void afficherParking(const PlaceDeParking* parking, size_t nbPlace);
 
 void afficherPlaceDeParking(const PlaceDeParking* placeDeParking);
 

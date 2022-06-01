@@ -22,18 +22,21 @@ Compilateur    : Compilation fonctionnelle avec :
 #include "parking.h"
 #include "taxes.h"
 
-void calculerTaxesAnnuellesParking(PlaceDeParking *parking, const size_t nbPlace) {
-   assert(parking);
+PlaceDeParking* calculerTaxesAnnuellesParking(Vehicule *vehicule, size_t nbPlace) {
+   assert(vehicule);
+   assert(nbPlace > 0);
+
+   PlaceDeParking* parking = calloc(nbPlace, sizeof(PlaceDeParking));
    
    for (size_t i = 0; i < nbPlace; ++i) {
-      assert(&parking[i]);
-      assert(&parking[i].vehicule);
-
-      parking[i].taxeAnnuelle = calculerTaxeAnnuelle(&parking[i].vehicule);
+      parking[i].vehicule = vehicule + i;
+      parking[i].taxeAnnuelle = calculerTaxeAnnuelle(vehicule + i);
    }
+
+   return parking;
 }
 
-const StatTaxes calculerStatPlaceDePark(PlaceDeParking *parking, const size_t nbPlace, const int (*estVehicule)(const Vehicule *)) {
+const StatTaxes calculerStatPlaceDePark(PlaceDeParking *parking, size_t nbPlace, int (*estVehicule)(const Vehicule *)) {
    StatTaxes stat = {};
    double sommeDesCarres = 0.;
 
@@ -43,8 +46,9 @@ const StatTaxes calculerStatPlaceDePark(PlaceDeParking *parking, const size_t nb
    
    for (size_t i = 0; i < nbPlace; ++i) {
       assert(&parking[i]);
-      assert(&parking[i].vehicule);
-      if (estVehicule(&parking[i].vehicule)) {
+      assert(parking[i].vehicule);
+
+      if (estVehicule(parking[i].vehicule)) {
          indexPlaceFiltree[nbPlaceFiltree++] = i;
 
          stat.somme += parking[i].taxeAnnuelle;
@@ -77,13 +81,13 @@ int taxeAnnuelleDecroissant (const void* a, const void* b) {
    return placeB->taxeAnnuelle - placeA->taxeAnnuelle;
 }
 
-void trierParking(PlaceDeParking *parking, const size_t nbPlace) {
+void trierParking(PlaceDeParking *parking, size_t nbPlace) {
    assert(parking);
 
    qsort(parking, nbPlace, sizeof(PlaceDeParking), taxeAnnuelleDecroissant);
 }
 
-void afficherParking(const PlaceDeParking *parking, const size_t nbPlace) {
+void afficherParking(const PlaceDeParking *parking, size_t nbPlace) {
    assert(parking);
 
    const char *TITRE = "*  Affichage du parking  *";
@@ -96,7 +100,7 @@ void afficherParking(const PlaceDeParking *parking, const size_t nbPlace) {
 
    for (size_t i = 0; i < nbPlace; ++i) {
       assert(&parking[i]);
-      assert(&parking[i].vehicule);
+      assert(parking[i].vehicule);
 
       afficherPlaceDeParking(&parking[i]);
 
@@ -105,19 +109,19 @@ void afficherParking(const PlaceDeParking *parking, const size_t nbPlace) {
 }
 
 // Utilisation de macro afin d'améliorer la lisibilité du code
-#define VOIT_ALIAS placeDeParking->vehicule.voiture
+#define VOIT_ALIAS placeDeParking->vehicule->voiture
 #define VOIT_STANDARD_ALIAS VOIT_ALIAS.standard
 #define VOIT_HAUT_DE_GAMME_ALIAS VOIT_ALIAS.hautDeGamme
-#define CAMIONETTE_ALIAS placeDeParking->vehicule.camionette
+#define CAMIONETTE_ALIAS placeDeParking->vehicule->camionette
 
 void afficherPlaceDeParking(const PlaceDeParking* placeDeParking) {
    assert(placeDeParking);
 
-   printf("Type                     : %s\n", TYPES_VEHICULE[placeDeParking->vehicule.typeVehicule]);
-   printf("Marque                   : %s\n", placeDeParking->vehicule.marque);
-   printf("Plaque                   : %s\n", placeDeParking->vehicule.plaqueImmatriculation);
+   printf("Type                     : %s\n", TYPES_VEHICULE[placeDeParking->vehicule->typeVehicule]);
+   printf("Marque                   : %s\n", placeDeParking->vehicule->marque);
+   printf("Plaque                   : %s\n", placeDeParking->vehicule->plaqueImmatriculation);
 
-   switch (placeDeParking->vehicule.typeVehicule) {
+   switch (placeDeParking->vehicule->typeVehicule) {
       case VOITURE:
 
          printf("Categorie voiture        : %s\n", TYPES_VOITURE[VOIT_ALIAS.typeVoiture]);

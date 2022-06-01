@@ -23,28 +23,31 @@ Compilateur    : Compilation fonctionnelle avec :
 #include "parking.h"
 
 int main(void) {
-   PlaceDeParking parking[] = {
-      { .vehicule = creerVoitureStandard("VD123456", "Fiat", 1130u, 1200u, 125u) },
-      { .vehicule = creerVoitureStandard("JU654321", "Toyota", 1320u, 1430u, 145u) },
-      { .vehicule = creerVoitureStandard("BE011235", "Ford", 1660u, 2200u, 190u) },
-      { .vehicule = creerVoitureHautDeGamme("LU080085", "Rolls-Royce", 2600u, 220u) },
-      { .vehicule = creerVoitureHautDeGamme("ZH420666", "Jaguar", 1660u, 600u) },
-      { .vehicule = creerCamionette("FR987654", "Citroen", 50u) }
+   Vehicule vehicules[] = {
+      creerVoitureStandard("VD123456", "Fiat", 1130u, 1200u, 125u),
+      creerVoitureStandard("JU654321", "Toyota", 1320u, 1430u, 145u),
+      creerVoitureStandard("BE011235", "Ford", 1660u, 2200u, 190u),
+      creerVoitureHautDeGamme("LU080085", "Rolls-Royce", 2600u, 220u),
+      creerVoitureHautDeGamme("ZH420666", "Jaguar", 1660u, 600u),
+      creerCamionette("FR987654", "Citroen", 50u)
    };
 
-   const size_t NB_PLACE_DE_PARK = sizeof(parking) / sizeof(parking[0]);
+   const size_t NB_VEHICULES = sizeof(vehicules) / sizeof(vehicules[0]);
 
    // Calcul de taxes et affichage du parking
-   calculerTaxesAnnuellesParking(parking, NB_PLACE_DE_PARK);
-   trierParking(parking, NB_PLACE_DE_PARK);
-   afficherParking(parking, NB_PLACE_DE_PARK);
+   PlaceDeParking* parking = calculerTaxesAnnuellesParking(vehicules, NB_VEHICULES);
+   trierParking(parking, NB_VEHICULES);
+   afficherParking(parking, NB_VEHICULES);
 
    // Calcul et affichage des statistiques du parking
-   const StatTaxes statVoitureStandard = calculerStatPlaceDePark(parking, NB_PLACE_DE_PARK, estVoitureStandard);
-   const StatTaxes statVoitureHautDeGamme = calculerStatPlaceDePark(parking, NB_PLACE_DE_PARK, estVoitureHautDeGamme);
-   const StatTaxes statCamionette = calculerStatPlaceDePark(parking, NB_PLACE_DE_PARK, estCamionette);
+   const StatTaxes statVoitureStandard = calculerStatPlaceDePark(parking, NB_VEHICULES, estVoitureStandard);
+   const StatTaxes statVoitureHautDeGamme = calculerStatPlaceDePark(parking, NB_VEHICULES, estVoitureHautDeGamme);
+   const StatTaxes statCamionette = calculerStatPlaceDePark(parking, NB_VEHICULES, estCamionette);
 
    afficherStat("Statistiques des taxes des voitures standards:", &statVoitureStandard);
    afficherStat("\nStatistiques des taxes des voitures haut de gamme:", &statVoitureHautDeGamme);
    afficherStat("\nStatistiques des taxes des camionettes:", &statCamionette);
+
+   // Libère la mémoire du parking
+   free(parking);
 }
