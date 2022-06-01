@@ -15,7 +15,6 @@ Compilateur    : Compilation fonctionnelle avec :
 --------------------------------------------------------------------------------
 */
 
-#include <stdio.h>    // Requis pour la macro NULL
 #include <assert.h>   // Requis pour assert
 #include "vehicule.h"
 
