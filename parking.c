@@ -18,9 +18,9 @@ Compilateur    : Compilation fonctionnelle avec :
 #include <stdio.h>   // Requis pour printf
 #include <string.h>  // Requis pour strlen
 #include <assert.h>  // Requis pour assert
-#include <math.h>    // Requis pour sqrt
 #include "parking.h"
 #include "taxes.h"
+#include "statistique.h"
 
 PlaceDeParking* calculerTaxesAnnuellesParking(Vehicule *vehicule,
    size_t nbPlace) {
@@ -41,39 +41,23 @@ PlaceDeParking* calculerTaxesAnnuellesParking(Vehicule *vehicule,
 const StatTaxes calculerStatPlaceDePark(PlaceDeParking *parking,
    size_t nbPlace, bool (*estVehicule)(const Vehicule *)) {
    StatTaxes stat = {};
-   double sommeDesCarres = 0.;
 
-   // Tableau contenant les index des places de parking qui ont les véhicules qui ont le bon type
-   size_t* indexPlaceFiltree = (size_t*)calloc(nbPlace, sizeof(size_t));
-   size_t nbPlaceFiltree = 0; // Nombre de places de park filtré selon la fonction estVehicule
-   
+   // Extrait les taxes des véhicules filtrés par la fonction passé
+   // en paramètre dans un tableau de double
+   double taxes[nbPlace];
+   size_t nbVehiculeFiltree = 0;
+
    for (size_t i = 0; i < nbPlace; ++i) {
-      assert(&parking[i]);
-      assert(parking[i].vehicule);
-
       if (estVehicule(parking[i].vehicule)) {
-         indexPlaceFiltree[nbPlaceFiltree++] = i;
-
-         stat.somme += parking[i].taxeAnnuelle;
-         sommeDesCarres += parking[i].taxeAnnuelle * parking[i].taxeAnnuelle;
+         taxes[nbVehiculeFiltree++] = parking[i].taxeAnnuelle;
       }
    }
 
-   if (nbPlaceFiltree > 0u) {
-      if (nbPlaceFiltree % 2u) {
-         stat.mediane = parking[indexPlaceFiltree[nbPlaceFiltree / 2u]].taxeAnnuelle;
-      } else {
-         stat.mediane = (parking[indexPlaceFiltree[nbPlaceFiltree / 2u]].taxeAnnuelle + parking[indexPlaceFiltree[nbPlaceFiltree / 2u + 1]].taxeAnnuelle) / 2.;
-      }
-   }
-   free(indexPlaceFiltree);
-
-   stat.moyenne = nbPlaceFiltree > 0u ? stat.somme / (double)nbPlaceFiltree : 0.;
-
-   // La variance est égale à la différence entre la moyenne des carrés et le carré de la moyenne
-   // L'écart type est égale à la racine carré de la variance
-   stat.ecartType = nbPlaceFiltree > 0u ? sqrt(sommeDesCarres / (double)nbPlaceFiltree - stat.moyenne * stat.moyenne) : 0;
-
+   stat.somme = somme(taxes, nbVehiculeFiltree);
+   stat.moyenne = moyenne(taxes, nbVehiculeFiltree);
+   stat.mediane = mediane(taxes, nbVehiculeFiltree);
+   stat.ecartType = ecartType(taxes, nbVehiculeFiltree);
+   
    return stat;
 }
 
