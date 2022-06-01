@@ -24,6 +24,8 @@ double somme(const double* donnee, size_t nbDonnee);
 
 double moyenne(const double* donnee, size_t nbDonnee);
 
+// On part du principe que le tableau de données est préalablement trié
+// par ordre croissant ou décroissant
 double mediane(const double* donnee, size_t nbDonnee);
 
 double ecartType(const double* donnee, size_t nbDonnee);

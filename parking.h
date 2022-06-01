@@ -35,10 +35,15 @@ typedef struct {
 PlaceDeParking* calculerTaxesAnnuellesParking(Vehicule* parking,
    size_t nbPlace);
 
+// Attention, on considère que le tableau de données est préalablement trié
+// par ordre croissant ou décroissant
 const StatTaxes calculerStatPlaceDePark(PlaceDeParking* parking,
-   size_t nbPlace, bool (*estVehicule)(const Vehicule *));
+   size_t nbPlace, bool (*estVehicule)(const Vehicule*));
 
-PlaceDeParking* trierParking(PlaceDeParking* parking, size_t nbPlace);
+int taxeAnnuelleDecroissant (const void* a, const void* b);
+
+PlaceDeParking* trierParking(PlaceDeParking* parking,
+   size_t nbPlace, int (*comparer)(const void*, const void*));
 
 void afficherParking(const PlaceDeParking* parking, size_t nbPlace);
 

@@ -22,7 +22,7 @@ Compilateur    : Compilation fonctionnelle avec :
 #include "taxes.h"
 #include "statistique.h"
 
-PlaceDeParking* calculerTaxesAnnuellesParking(Vehicule *vehicule,
+PlaceDeParking* calculerTaxesAnnuellesParking(Vehicule* vehicule,
    size_t nbPlace) {
    assert(vehicule);
    assert(nbPlace > 0);
@@ -60,8 +60,11 @@ const StatTaxes calculerStatPlaceDePark(PlaceDeParking* parking,
 
    stat.somme = somme(taxes, nbVehiculeFiltree);
    stat.moyenne = moyenne(taxes, nbVehiculeFiltree);
-   stat.mediane = mediane(taxes, nbVehiculeFiltree);
    stat.ecartType = ecartType(taxes, nbVehiculeFiltree);
+
+   // Attention, ici la médiane peut être calculé uniquement si le parking passé
+   // en paramètre a été préalablement trié par ordre croissant ou décroissant
+   stat.mediane = mediane(taxes, nbVehiculeFiltree);
    
    return stat;
 }
@@ -74,19 +77,20 @@ int taxeAnnuelleDecroissant (const void* a, const void* b) {
       placeA->taxeAnnuelle < placeB->taxeAnnuelle ? 1 : 0;
 }
 
-PlaceDeParking* trierParking(PlaceDeParking *parking, size_t nbPlace) {
+PlaceDeParking* trierParking(PlaceDeParking* parking,
+   size_t nbPlace, int (*comparer)(const void*, const void*)) {
    assert(parking);
    
    if (!nbPlace) return NULL;
 
    return (PlaceDeParking*)trier((void*)parking, nbPlace,
-      taxeAnnuelleDecroissant, sizeof(PlaceDeParking));
+      comparer, sizeof(PlaceDeParking));
 }
 
-void afficherParking(const PlaceDeParking *parking, size_t nbPlace) {
+void afficherParking(const PlaceDeParking* parking, size_t nbPlace) {
    assert(parking);
 
-   const char *TITRE = "*  Affichage du parking  *";
+   const char* TITRE = "*  Affichage du parking  *";
    const unsigned TAILLE_TITRE = (unsigned)strlen(TITRE);
 
    for (unsigned i = TAILLE_TITRE; i--; putchar('*'));

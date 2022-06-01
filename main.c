@@ -54,7 +54,8 @@ int main(void) {
       return EXIT_FAILURE;
    }
 
-   PlaceDeParking* parkingTrie = trierParking(parking, NB_VEHICULES);
+   PlaceDeParking* parkingTrie = trierParking(parking, NB_VEHICULES,
+      taxeAnnuelleDecroissant);
 
    if (!parkingTrie) {
       printf(MSR_ERR_ALLOC_MEMOIRE);
